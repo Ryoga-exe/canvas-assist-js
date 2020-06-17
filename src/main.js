@@ -1,3 +1,3 @@
-fetch('js/canvas-assist.js').then(r=>r.text()).then(t=>eval(t)).then(()=>{
+window.addEventListener("DOMContentLoaded", function() {
     createCanvas('canvas');
 });
