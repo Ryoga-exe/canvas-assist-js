@@ -14,14 +14,16 @@ function canvasAssist(id, width = 640, height = 480, mode = 'fixed') {
     this.getCanvas = () => this._canvas;
     this.setMode = function(m) {
         this._mode = m;
-        switch(_mode){
+        switch(_mode) {
             case fixed:
                 break;
             case responsive:
                 break;
+            case resizeToSame:
+                break;
             case fullscreen:
                 break;
-            case resizeToSame:
+            case max-size:
                 break;
             default:
                 break;
@@ -32,3 +34,12 @@ function canvasAssist(id, width = 640, height = 480, mode = 'fixed') {
     this.update = function() {
     }
 }
+
+async function getJSON(fileName) {
+    let jsonContent;
+    await fetch(fileName).then
+        (r => r.text()).then(t => {
+        jsonContent = JSON.parse(t);
+        });
+    return jsonContent;
+    }
