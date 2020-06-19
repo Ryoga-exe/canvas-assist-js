@@ -5,16 +5,19 @@ function createCanvas(id, dom = document.body, msg = 'Your browser does not supp
     dom.appendChild(canvas);
 }
 
-function canvasAssist(id, width = 640, height = 480, mode = 'fixed') {
-    this._canvas = document.getElementById(id);
-    this._ctx = this._canvas.getContext('2d');
-    this._canvas.width  = this._width  = width;
-    this._canvas.height = this._height = height;
-    this._mode = mode;
-    this.getCanvas = () => this._canvas;
+function canvasAssist(id, mode = 'fixed', width = 640, height = 480) {
+    this.canvas = {
+        c      : document.getElementById(id),
+        ctx    : document.getElementById(id).getContext('2d'),
+        width  : width,
+        height : height,
+        mode   : mode,
+    };
+    this.canvas.c.width  = width;
+    this.canvas.c.height = height;
     this.setMode = function(m) {
-        this._mode = m;
-        switch(_mode) {
+        this.canvas.mode = m;
+        switch(m) {
             case fixed:
                 break;
             case responsive:
@@ -29,11 +32,34 @@ function canvasAssist(id, width = 640, height = 480, mode = 'fixed') {
                 break;
         }
     }
+    this.changeSize = function(width, height) {
+        this.canvas.c.width  = this.canvas.width  = width;
+        this.canvas.c.height = this.canvas.height = height;
+    }
     this.init = function() {
     }
     this.update = function() {
     }
 }
+
+/*
+class CanvasAssist {
+    constructor(id, mode = 'fixed', width = 640, height = 480){
+        this. _canvas = document.getElementById(id);
+        this._ctx = _canvas.getContext('2d');
+        this._canvas.width  = this._width  = width;
+        this._canvas.height = this._height = height;
+        this._mode = mode;
+    }
+    getCanvas = () => this._canvas;
+    init() {
+
+    }
+    update() {
+
+    }
+}
+*/
 
 async function getJSON(fileName) {
     let jsonContent;
@@ -42,4 +68,4 @@ async function getJSON(fileName) {
         jsonContent = JSON.parse(t);
         });
     return jsonContent;
-    }
+}
